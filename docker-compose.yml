@@ -1,0 +1,28 @@
+version: "3.9"
+services:
+ MQ:
+   image: rabbitmq
+   ports:
+   - "5672:5672"
+   hostname: rabbitserver
+
+ runserver:
+   image: consumer-backend:v1
+   ports:
+   - "8000:8000"
+   command: python manage.py runserver
+   depends_on:
+    - MQ
+ 
+ consumer:
+   image: consumer-backend:v1
+   command: python consumer.py
+   environment: 
+    RABBITMQ_HOST: rabbitserver
+   depends_on:
+    - runserver
+   restart: always
+
+   
+networks:
+ scrapy:
