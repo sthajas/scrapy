@@ -42,7 +42,7 @@ An Approach to use a scrapy spiders as an independent web service with django an
  First build docker image locally
 '''
   $ docker build -t consumer-backend:v1 .
-  $ docker-compose upg
+  $ docker-compose up
   $ docker-compose down
 '''
 
